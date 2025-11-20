@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # --- Define test function ---
 def test_function(x):
-    return 1 / ((x -.3) **2 + .01) + 1/((x -.9) **2 + .04) - 6
+    return np.sin(21*x)*np.exp(-0.3*x) + x 
 
 # --- Composite Simposon's rule ---
 def simpson(y, a, b, n):
@@ -25,7 +25,8 @@ def simpson(y, a, b, n):
 def test_integration():
     # reference function
     xmin = 0
-    xmax = 2
+    xmax = np.pi
+    I_exact = 5.00096303820792
     x_fine = np.linspace(xmin, xmax, 1000)
     y_fine = test_function(x_fine)
     plt.figure(1)
@@ -37,6 +38,7 @@ def test_integration():
     I_exact, err = quad(test_function, xmin, xmax, epsabs =1e-12, epsrel=1e-12)
     print(I_exact, err)
     n = 10
+
     for i in range(1,9):
         x = np.linspace(xmin, xmax, n+1)
         y = test_function(x)
@@ -47,6 +49,7 @@ def test_integration():
         H.append(h)
         H4.append(h**4)
         n = 2*n
+        print(f"n = {n:5d} | I = {I:.12f} | error = {err:.3e}")
         plt.figure(1)
         plt.plot(x,y, linewidth=1.5, label='n='+str(n))
         plt.legend(loc='upper left')
@@ -70,3 +73,7 @@ def test_integration():
 # --- The main part of the program ---
 if __name__ == "__main__":
     test_integration()
+
+#Ändrade bara testfunktionen och la till vad den exakta integralens värde är.
+#Ju längre vi går desto mindre blir felet, vilket är förväntat.
+#Vid n = 1280 är felet ungefär 10^-11 vilket är mycket bra nog för de flesta tillämpningar.
