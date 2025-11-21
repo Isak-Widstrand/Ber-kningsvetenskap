@@ -34,7 +34,6 @@ def test_integration():
     E = []
     H = []
     H4 = []
-    N = []
     I_exact, err = quad(test_function, xmin, xmax, epsabs =1e-12, epsrel=1e-12)
     print(I_exact, err)
     n = 10
@@ -77,3 +76,4 @@ if __name__ == "__main__":
 #Ändrade bara testfunktionen och la till vad den exakta integralens värde är.
 #Ju längre vi går desto mindre blir felet, vilket är förväntat.
 #Vid n = 1280 är felet ungefär 10^-11 vilket är mycket bra nog för de flesta tillämpningar.
+#Redigerade funktionen och la till det exacta värdet och toh bort N =[].
